@@ -1,1 +1,1 @@
-web: yarn start:node
+web: node dist/index.js

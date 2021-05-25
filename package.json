@@ -35,9 +35,9 @@
     "format": "prettier --write src/**/*.ts",
     "prebuild": "rimraf  build",
     "build": "tsc -p ./",
-    "postbuild": "cd src && cpx schema.graphql ../dist",
+    "postbuild": "cd src && cpx schema.graphql ../build",
     "type": "nodemon --exec graphql-to-typescript src/schema.graphql ./src/types/graph.d.ts",
-    "start:node": "cd dist && node index.js"
+    "start": "cd build && node index.js"
   },
   "engines": {
     "node": "14.15.4",
