@@ -2,10 +2,17 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./build",
+    "outDir": "./dist",
+    "baseUrl": "./",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true
   },
-  "exclude": ["temp"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "acceptance-tests",
+    "jest",
+    "src/setupTests.ts"
+  ]
 }

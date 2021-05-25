@@ -7,6 +7,14 @@ import fs from'fs'
 import mongoose from'mongoose'
 const typeDefs = gql`${fs.readFileSync(__dirname.concat('/schema.graphql'), 'utf8')}`;
 
+
+const PORT=9000
+const DB_USER="user_01"
+const DB_USER_PASSWORD="tWvqux9mSDig4osq"
+const DB_CLUSTER="cluster0.4fc5x"
+const NODE_ENV="development"
+
+
 const mount = async (app: Application) => {
 
   app.use(express.json());
@@ -14,7 +22,7 @@ const mount = async (app: Application) => {
 
 
 
-const url=`mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const url=`mongodb+srv://${DB_USER}:${DB_USER_PASSWORD}@${DB_CLUSTER}.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -27,8 +35,8 @@ const url=`mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@
   }); 
 
   server.applyMiddleware({ app, path: "/api" });
-  app.listen(process.env.PORT,()=>{
-    console.log(`[app] : http://localhost:${process.env.PORT}`)
+  app.listen(PORT,()=>{
+    console.log(`[app] : http://localhost:${PORT}`)
     
   });
 }

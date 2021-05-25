@@ -28,14 +28,19 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "predev": "yarn run type",
+    "lint": "eslint src/**/*.ts --quiet --fix",
+    "dev:start": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
+    "format": "prettier --write src/**/*.ts",
+    "prebuild": "rimraf  build",
+    "build": "tsc -p ./",
+    "postbuild": "cd src && copy schema.graphql ../dist",
     "type": "nodemon --exec graphql-to-typescript src/schema.graphql ./src/types/graph.d.ts",
-     "build": "tsc -p ./src",
-    "start": "cd dist && node ."
+    "start:node": "cd dist && node ."
   },
   "engines": {
     "node": "14.15.4",
     "npm": "7.6.1"
-  },
+  }
 
 }
