@@ -8,7 +8,7 @@ import mongoose from'mongoose'
 const typeDefs = gql`${fs.readFileSync(__dirname.concat('/schema.graphql'), 'utf8')}`;
 
 
-const PORT=9000
+const PORT=8080;
 const DB_USER="user_01"
 const DB_USER_PASSWORD="tWvqux9mSDig4osq"
 const DB_CLUSTER="cluster0.4fc5x"
