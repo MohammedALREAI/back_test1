@@ -30,6 +30,12 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "type": "nodemon --exec graphql-to-typescript src/schema.graphql ./src/types/graph.d.ts",
-    "build": "tsc -p ./"
-  }
+     "build": "tsc -p ./src",
+    "start": "cd dist && node ."
+  },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "7.6.1"
+  },
+
 }
