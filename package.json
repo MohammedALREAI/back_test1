@@ -20,6 +20,7 @@
     "@types/slug": "^0.9.1",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
+    "cpx": "^1.5.0",
     "dotenv": "^8.0.0",
     "eslint": "^6.0.1",
     "graphql-to-typescript": "^0.1.2",
@@ -34,7 +35,7 @@
     "format": "prettier --write src/**/*.ts",
     "prebuild": "rimraf  build",
     "build": "tsc -p ./",
-    "postbuild": "cd src && copy schema.graphql ../dist",
+    "postbuild": "cd src && cpx schema.graphql ../dist",
     "type": "nodemon --exec graphql-to-typescript src/schema.graphql ./src/types/graph.d.ts",
     "start:node": "cd dist && node ."
   },
@@ -42,5 +43,4 @@
     "node": "14.15.4",
     "npm": "7.6.1"
   }
-
 }
