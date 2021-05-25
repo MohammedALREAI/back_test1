@@ -11,17 +11,25 @@ const mount = async (app: Application) => {
 
   app.use(express.json());
 
+
+
+
 const url=`mongodb+srv://${process.env.DB_USER}:${process.env.DB_USER_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
   const server = new ApolloServer({
     typeDefs,
     resolvers,
   });
-  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+
+
+  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('DB Connected!'))
+  .catch(err => {
+  console.log(`DB Connection Error: ${err.message}`);
+  }); 
 
   server.applyMiddleware({ app, path: "/api" });
   app.listen(process.env.PORT,()=>{
     console.log(`[app] : http://localhost:${process.env.PORT}`)
-
+    
   });
 }
  mount(express())

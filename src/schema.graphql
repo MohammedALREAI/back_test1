@@ -20,14 +20,6 @@
   attrs: [AttrsProduct]
 }
 
-
-
-
-
-
-
-
-
 type Query {
         products:[ProductVariant]
         # product(id:ID!):Product!

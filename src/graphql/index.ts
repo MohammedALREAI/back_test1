@@ -1,5 +1,6 @@
+import { IProduct } from './../model/product';
 import { IProductVariant } from './../model/ProductVapis';
-import { CreateProductMutationArgs, ProductVariant } from './../types/graph.d';
+import { CreateProductMutationArgs, Product as ProductType, ProductVariant as ProductVariantType } from './../types/graph.d';
 import { ObjectId } from 'mongodb';
 import { IResolvers } from 'apollo-server-express';
 import slug from 'slug'
@@ -13,7 +14,7 @@ export const resolvers: IResolvers = {
     createProduct: async (
         _root: undefined,
         { input }: CreateProductMutationArgs,
-      ): Promise<ProductVariant> => {
+      ): Promise<ProductVariantType> => {
         
         const {attrs,products ,price} = input;
 try {
@@ -39,7 +40,7 @@ try {
           product:newProduct._id
       });
         const res=await (insertRes.save());
-        return res as ProductVariant;
+        return res as ProductVariantType;
 } catch (e) {
         throw new Error(`ther are some thing issuie in the createProduct Mutation in insert new Product ${e}`)
 
@@ -47,7 +48,8 @@ try {
 
       }}
       ,Query:{
-        products:async (_root: undefined): Promise<ProductVariant[] | null> => {
+        products:async (_root): Promise<ProductVariantType[] | null> => {
+
               try {
                   const allProduct=await ProductVariantModel.find({})
                   if(!allProduct){
@@ -55,7 +57,7 @@ try {
                   }
 
                 
-                return allProduct as ProductVariant[]
+                return allProduct as ProductVariantType[]
 
 
               
@@ -67,12 +69,22 @@ try {
         }
                 }
               ,
-              ProductVariant:{
-                product: async(parent, __, {})=> {
-                  return await ProductVariantModel.findOne({id: parent.id})
-                }
-                
 
-              }
-            
-            }
+
+              ProductVariant:{
+                id: ({id}: ProductVariantType): string => {
+                  return id
+                },
+                product:async(parent: ProductVariantType): Promise<IProduct | null> => {
+                  const re=await Product.findOne({id:parent.product})
+                  if(!re){
+                    return null
+                  }
+                  return re 
+
+                }
+
+
+              },}
+
+             
