@@ -2,7 +2,7 @@
  type Product {
     id: ID!
     name: String!
-    slug: String!
+    slug: String
     description:String!
     
   }
@@ -29,7 +29,7 @@ type Query {
 
 input ProductInput{
  name: String!
-    description:String!
+description:String!
     }
 input CreateProductInput {
     products:ProductInput!

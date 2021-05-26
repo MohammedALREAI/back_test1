@@ -13,9 +13,7 @@ import {Schema,Document} from 'mongoose'
         type: String,
         required: true
    },
-      slug:{type:String,
-          required: true
-      },
+      slug:{type:String,},
       description:{
           type:String,
         required: true

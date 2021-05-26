@@ -31,7 +31,7 @@
   "scripts": {
     "predev": "yarn run type",
     "lint": "eslint src/**/*.ts --quiet --fix",
-    "dev:start": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
+    "dev2": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
     "format": "prettier --write src/**/*.ts",
     "prebuild": "rimraf  build",
     "build": "tsc -p ./",

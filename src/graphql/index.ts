@@ -29,6 +29,7 @@ try {
     })
      // eslint-disable-next-line @typescript-eslint/camelcase
      await newProduct.save();
+     console.log("the new  newProduct",newProduct)
 
 
 
@@ -40,6 +41,7 @@ try {
           product:newProduct._id
       });
         const res=await (insertRes.save());
+        console.log("product varient is ",res.populate('product').execPopulate())
         return res as ProductVariantType;
 } catch (e) {
         throw new Error(`ther are some thing issuie in the createProduct Mutation in insert new Product ${e}`)
@@ -51,7 +53,7 @@ try {
         products:async (_root): Promise<ProductVariantType[] | null> => {
 
               try {
-                  const allProduct=await ProductVariantModel.find({})
+                  const allProduct=await ProductVariantModel.find({}).populate('product')
                   if(!allProduct){
                     return  null
                   }
@@ -76,7 +78,7 @@ try {
                   return id
                 },
                 product:async(parent: ProductVariantType): Promise<IProduct | null> => {
-                  const re=await Product.findOne({id:parent.product})
+                  const re=await Product.findOne({id:parent.product}).populate('product');
                   if(!re){
                     return null
                   }
