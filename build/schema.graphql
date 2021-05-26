@@ -1,0 +1,59 @@
+
+ type Product {
+    id: ID!
+    name: String!
+    slug: String
+    description:String!
+    
+  }
+
+  type AttrsProduct{
+  name:String!
+  value:String!
+
+}
+
+  type  ProductVariant {
+  id: ID!
+  product: Product!
+  price: Int!
+  attrs: [AttrsProduct]
+}
+
+type Query {
+        products:[ProductVariant]
+        # product(id:ID!):Product!
+
+
+}
+
+input ProductInput{
+ name: String!
+description:String!
+    }
+input CreateProductInput {
+    products:ProductInput!
+    attrs:[AttrsInput!]!
+    price:Int!
+
+
+}
+input AttrsInput {
+    name:String!
+  value:String!
+}
+
+
+type Mutation {
+        createProduct(input:CreateProductInput!):ProductVariant!
+
+  
+}
+
+
+
+
+
+
+
+
